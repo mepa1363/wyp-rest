@@ -6,15 +6,6 @@ const db = require('./config')
 
 const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://walkyourplace.ca'
 
-const buildPolygon = polygon => {
-    polygon = JSON.parse(polygon)
-    let poly = ''
-    for (let coordinates of polygon['features'][0]['geometry']['coordinates'][0][0]) {
-        poly += `${parseFloat(coordinates[1]).toFixed(3)} ${parseFloat(coordinates[0]).toFixed(3)} `
-    }
-    poly = poly.substring(0, poly.length - 1)
-    return poly
-}
 const getPoi = polygon => {
     const polygonFeatures = JSON.parse(polygon).features
     let spatialCondition = ''
