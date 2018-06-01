@@ -24,17 +24,17 @@ const getPoi = polygon => {
                                     FROM planet_osm_point
                                     WHERE category IS NOT NULL AND (${spatialCondition})) inputs) features;`
     return new Promise((resolve, reject) => {
-        db.multi(query)
+        db.any(query)
             .then(data => {
-                const c = []
-                for (let a of data) {
-                    for (let b of a[0].features) {
-                        c.push(b.feature)
+                const features = []
+                if (data[0].features !== null) {
+                    for (let item of data[0].features) {
+                        features.push(item.feature)
                     }
                 }
                 resolve({
                     "type": "FeatureCollection",
-                    "features": c
+                    "features": features
                 })
             })
             .catch(error => {
