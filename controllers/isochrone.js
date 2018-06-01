@@ -5,7 +5,7 @@ const axios = require('axios')
 const getIsochrone = (origin, mode, maxWalkDistance, threshold, date, time) => {
     const thresholds = 'cutoffSec=' + threshold.split(',').join('&cutoffSec=')
     mode = mode.toUpperCase()
-    let url = `http://localhost:8080/otp/routers/calgary/isochrone?fromPlace=${origin}&mode=${mode}&maxWalkDistance=${maxWalkDistance}&${thresholds}`
+    let url = `http://localhost:8080/otp/routers/calgary/isochrone?fromPlace=${origin}&mode=${mode.toUpperCase()}&maxWalkDistance=${maxWalkDistance}&${thresholds}`
     if (date !== null && date !== undefined) {
         url += `&date=${date}` //mm-dd-yyyy
     }

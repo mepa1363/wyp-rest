@@ -71,16 +71,16 @@ const get = (req, res) => {
             const crimeWeights = {
                 "Arson": [1, 1, 1, 1],
                 "Assault": [10],
-                "Attempted Murder": [4.5, 4.5],
-                "Commercial Break-In": [.5, .5, .5, .5, .5, .5, .5, .5, .5, .5],
+                "AttemptedMurder": [4.5, 4.5],
+                "CommercialBreakIn": [.5, .5, .5, .5, .5, .5, .5, .5, .5, .5],
                 "Homicide": [9],
-                "Residential Break-In": [.5, .5, .5, .5, .5, .5, .5, .5, .5, .5],
+                "ResidentialBreakIn": [.5, .5, .5, .5, .5, .5, .5, .5, .5, .5],
                 "Robbery": [2, 1.5, 1.5],
-                "Sex Offence": [10],
+                "SexOffence": [10],
                 "Theft": [.4, .4, .4, .4, .4, .4, .4, .4, .4, .4],
-                "Theft From Vehicle": [.3, .3, .3, .3, .3, .3, .3, .3, .3, .3],
+                "TheftFromVehicle": [.3, .3, .3, .3, .3, .3, .3, .3, .3, .3],
                 "Vandalism": [.2, .2, .2, .2, .2, .2, .2, .2, .2, .2],
-                "Vehicle Theft": [.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]
+                "VehicleTheft": [.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]
             }
             //calculate the sum of weights for poi
             let crimeSum = 0
@@ -102,11 +102,10 @@ const get = (req, res) => {
                 if (crimeWeights.hasOwnProperty(crimeType)) {
                     if (crimeWeights[crimeType].length >= crimeTypesAndCounts[crimeType]) {
                         for (let i = 0; i < crimeTypesAndCounts[crimeType]; i++) {
-                            // console.log(crimeTypes[crimeType][i])
                             crimeIndex += crimeWeights[crimeType][i]
                         }
                     } else {
-                        for (let i = 0; i < crimeTypes[crimeType].length; i++) {
+                        for (let i = 0; i < crimeWeights[crimeType].length; i++) {
                             crimeIndex += crimeWeights[crimeType][i]
                         }
                     }
