@@ -113,10 +113,24 @@ const get = (req, res) => {
             }
             const normalCrimeIndex = Math.round(crimeIndex / crimeSum * 100)
 
+            let crimeColor = ''
+            if (normalCrimeIndex >= 0 && normalCrimeIndex < 20)
+                crimeColor = '#39B54A'
+            else if (normalCrimeIndex >= 20 && normalCrimeIndex < 40)
+                crimeColor = '#8DC63F'
+            else if (normalCrimeIndex >= 40 && normalCrimeIndex < 60)
+                crimeColor = '#FFF200'
+            else if (normalCrimeIndex >= 60 && normalCrimeIndex < 80)
+                crimeColor = '#F7941E'
+            else if (normalCrimeIndex >= 80 && normalCrimeIndex <= 100)
+                crimeColor = '#ED1C24'
+
             for (let feature of isochrone.features) {
                 feature.properties.score = normalPoiIndex
                 feature.properties.crime_index = normalCrimeIndex
+                feature.properties.color = crimeColor
             }
+
             res.status(200).json(isochrone)
         })
 }
