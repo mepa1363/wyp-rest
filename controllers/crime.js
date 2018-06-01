@@ -19,13 +19,15 @@ const getCrime = polygon => {
     return new Promise((resolve, reject) => {
         db.any(query)
             .then(data => {
-                const a = []
-                for (let b of data[0].features) {
-                    a.push(b.feature)
+                const features = []
+                if (data[0].features !== null) {
+                    for (let item of data[0].features) {
+                        features.push(item.feature)
+                    }
                 }
                 resolve({
                     "type": "FeatureCollection",
-                    "features": a
+                    "features": features
                 })
             })
             .catch(error => {
