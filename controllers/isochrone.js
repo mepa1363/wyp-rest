@@ -2,10 +2,13 @@
 
 const axios = require('axios')
 
-const getIsochrone = (origin, mode, maxWalkDistance, threshold, date, time) => {
+const getIsochrone = (origin, mode, threshold, maxWalkDistance, date, time) => {
     const thresholds = 'cutoffSec=' + threshold.split(',').join('&cutoffSec=')
     mode = mode.toUpperCase()
-    let url = `http://localhost:8080/otp/routers/calgary/isochrone?fromPlace=${origin}&mode=${mode.toUpperCase()}&maxWalkDistance=${maxWalkDistance}&${thresholds}`
+    let url = `http://localhost:8080/otp/routers/calgary/isochrone?fromPlace=${origin}&mode=${mode.toUpperCase()}&${thresholds}`
+    if (maxWalkDistance !== null && maxWalkDistance !== undefined) {
+        url += `&maxWalkDistance=${maxWalkDistance}` //mm-dd-yyyy
+    }
     if (date !== null && date !== undefined) {
         url += `&date=${date}` //mm-dd-yyyy
     }
@@ -30,7 +33,7 @@ const get = (req, res) => {
     const threshold = req.query.threshold
     const date = req.query.date
     const time = req.query.time
-    const isochrone = getIsochrone(origin, mode, maxWalkDistance, threshold, date, time)
+    const isochrone = getIsochrone(origin, mode, threshold, maxWalkDistance, date, time)
     isochrone.then(result => {
         res.status(200)
             .json(result)

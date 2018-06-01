@@ -11,7 +11,7 @@ const get = (req, res) => {
     const threshold = req.query.threshold
     const date = req.query.date
     const time = req.query.time
-    const polygon = isochrone(origin, mode, maxWalkDistance, threshold, date, time)
+    const polygon = isochrone(origin, mode, threshold, maxWalkDistance, date, time)
     polygon.then(isochrone => {
             return Promise.all([
                 isochrone,
