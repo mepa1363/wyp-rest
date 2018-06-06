@@ -4,8 +4,6 @@ const axios = require('axios')
 const querystring = require('querystring')
 const db = require('./config')
 
-const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://walkyourplace.ca'
-
 const getPoi = polygon => {
     const polygonFeatures = JSON.parse(polygon).features
     let spatialCondition = ''
