@@ -132,6 +132,8 @@ const get = (req, res) => {
                 feature.properties.color = crimeColor
             }
 
+            isochrone.features = isochrone.features.concat(pois)
+
             res.status(200).json(isochrone)
         })
 }
